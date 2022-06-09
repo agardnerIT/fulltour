@@ -10,6 +10,9 @@ spec:
           tasks:
             - name: "je-deployment"
             - name: "je-test"
+            - name: "evaluation"
+              properties:
+                timeframe: "2m"
 
     - name: "production"
       sequences:
@@ -18,3 +21,6 @@ spec:
             - event: "qa.delivery.finished"
           tasks:
             - name: "je-deployment"
+            - name: "evaluation"
+              properties:
+                timeframe: "2m"
