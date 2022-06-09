@@ -20,6 +20,10 @@ spec:
           triggeredOn:
             - event: "qa.delivery.finished"
           tasks:
+            - name: "approval"
+              properties:
+                pass: "automatic"
+                warning: "automatic"
             - name: "je-deployment"
             - name: "je-test"
             - name: "evaluation"
