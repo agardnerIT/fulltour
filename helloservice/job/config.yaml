@@ -28,3 +28,15 @@ actions:
         image: "locustio/locust:2.8.6"
         cmd: ["locust"]
         args: ["--config", "/keptn/locust/locust.conf", "-f", "/keptn/locust/basic.py", "--host", "http://$(KEPTN_SERVICE).$(KEPTN_PROJECT)-$(KEPTN_STAGE)", "--only-summary"]
+
+  - name: "Remediation: Scaling with Helm"
+    events:
+      - name: "sh.keptn.event.action.triggered"
+    tasks:
+      - name: "Scale with Helm"
+        files:
+          - /charts
+        image: "alpine/helm:3.7.2"
+        serviceAccount: "jes-deploy-using-helm"
+        cmd: ["helm"]
+        args: ["upgrade", "-n", "$(KEPTN_PROJECT)-$(KEPTN_STAGE)", "$(KEPTN_SERVICE)", "/keptn/charts/$(KEPTN_SERVICE).tgz", "--set", "replicaCount=2"]
